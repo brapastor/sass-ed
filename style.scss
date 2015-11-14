@@ -1,0 +1,109 @@
+$color-red:peru;
+$margin:1em;
+$color:#cc988e;
+
+body{
+  font-size: 1em;
+}
+p{
+  color: $color-red;
+  margin: $margin;
+}
+.autores{
+  display: table;
+  &--item{
+    display: table-cell;
+  }
+}
+
+p{
+  width: 100%;
+  @media screen and (min-width: 1025px){
+    width: 75%;
+    margin: 0 auto;
+  }
+}
+
+// funciones de color
+// div
+// .darken
+// .saturate
+// .lighten
+// .desaturate
+// .rgba
+// .invert
+// .complement
+div{
+  width: 30%;
+  margin: 1.66%;
+  float: left;
+  height: 150px;
+  background: $color;
+}
+.darken{
+  background: darken($color,10%);
+}
+.lighten{
+  background: lighten($color, 20%);
+}
+.saturate{
+  background: saturate($color,30%);
+}
+.desaturate{
+  background: desaturate($color,30%);
+}
+.rgba{
+  background: rgba(red,.5);
+}
+.invert{
+  background: invert($color);
+}
+.complement{
+  background: complement($color);
+}
+
+// mixin
+@mixin borde($border-widht,$border-color,$borde-radius) {
+  border: $border-widht solid $border-color;
+  border-radius: $borde-radius;
+}
+
+div{
+  @include borde(2px, green, 10px);
+}
+// creando un map o objeto de sass
+$sizes: (
+  movil:480px,
+  tablet:768px,
+  web:1025px,
+  hd:1400px
+);
+
+// @each
+@each $device,$screen-size in $sizes{
+  @media all and (min-width:#{$screen-size}){
+    @for $i from 1 through 20{
+      .#{$device}-#{$i*5}{
+        width: $i*5%;
+      }
+    }
+  }
+
+}
+
+
+// @each $mq in movil, tablet,web,hd{
+//   @for $i from 1 through 20{
+//     .#{$mq}-#{$i*5}{
+//       width: $i*5;
+//     }
+//   }
+// }
+
+
+// loop
+// @for $i from 1 through 20{
+//   .web-#{$i*5}{
+//     width: $i*5;
+//   }
+// }
